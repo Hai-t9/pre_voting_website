@@ -1,0 +1,24 @@
+/* src/app/[locale]/globals.css */
+/* Tailwind base + Google Fonts for Cairo, IBM Plex Arabic, Inter */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=IBM+Plex+Arabic:wght@400;500&family=Inter:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Default body font swaps based on dir for correct script rendering */
+html[dir="rtl"] body {
+  font-family: "IBM Plex Arabic", sans-serif;
+}
+html[dir="ltr"] body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Headings always use Cairo regardless of language */
+h1, h2, h3, .font-headline {
+  font-family: "Cairo", sans-serif;
+}

@@ -1,0 +1,122 @@
+{
+    "nav": {
+      "brand": "Madame La Candidate",
+      "vision": "Vision",
+      "about": "À propos",
+      "commitment": "Engagement",
+      "initiatives": "Initiatives",
+      "voteNow": "Votez maintenant"
+    },
+    "hero": {
+      "title": "Construire aujourd'hui l'Algérie de demain, avec dignité et fierté",
+      "subtitle": "Un projet national plaçant le citoyen au cœur du développement, visant à renforcer la souveraineté nationale, développer l'économie numérique et impliquer la jeunesse dans la prise de décision.",
+      "cta": "Ajoutez votre voix"
+    },
+    "voteForm": {
+      "title": "Pacte d'Engagement",
+      "subtitle": "Rejoignez la liste des soutiens pour construire ensemble un meilleur avenir pour tous les Algériens",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Entrez votre nom complet",
+      "wilaya": "Wilaya",
+      "wilayaPlaceholder": "Choisissez votre wilaya",
+      "email": "E-mail",
+      "emailPlaceholder": "exemple@mail.com",
+      "wouldVote": "Voteriez-vous pour nous ?",
+      "wouldVotePlaceholder": "Choisissez une réponse",
+      "wouldVoteOptions": {
+        "yes": "Oui, je voterais pour vous",
+        "likely": "Probablement oui",
+        "moreInfo": "Je veux d'abord en savoir plus"
+      },
+      "message": "Commentaire additionnel (facultatif)",
+      "messagePlaceholder": "Partagez votre suggestion ou vos encouragements...",
+      "submit": "Ajouter ma voix",
+      "success": "Merci ! Votre voix a été enregistrée 🎉",
+      "error": "Une erreur est survenue, veuillez réessayer",
+      "duplicate": "Vous avez déjà soumis votre voix !"
+    },
+    "vision": {
+      "title": "Notre vision pour l'avenir",
+      "cards": [
+        {
+          "title": "Dignité économique",
+          "description": "Améliorer le pouvoir d'achat des citoyens et soutenir la production nationale pour réduire la dépendance aux importations."
+        },
+        {
+          "title": "Développement local",
+          "description": "Répartition équitable de la richesse entre les wilayas et autonomie financière des conseils municipaux."
+        },
+        {
+          "title": "Jeunesse et éducation",
+          "description": "Moderniser les programmes éducatifs, soutenir les startups et adapter l'éducation au marché du travail moderne."
+        },
+        {
+          "title": "Responsabilité et transparence",
+          "description": "Renforcer le contrôle institutionnel et garantir le droit des citoyens à l'accès à l'information et aux données publiques."
+        }
+      ]
+    },
+    "timeline": {
+      "title": "Un parcours de militantisme et d'action de terrain",
+      "intro": "Madame La Candidate a consacré sa vie au service public à travers l'engagement associatif et une action politique porteuse de sens, convaincue que le changement naît d'une volonté sincère et d'une action commune entre toutes les composantes du peuple algérien.",
+      "imageCaption": "L'action de terrain est le fondement du changement",
+      "items": [
+        {
+          "year": "2010",
+          "label": "Les débuts",
+          "description": "Fondation de l'association « Espoir » pour soutenir les familles productrices en zones rurales."
+        },
+        {
+          "year": "2015",
+          "label": "Action municipale",
+          "description": "Élue au conseil populaire municipal et présidente de la commission des affaires sociales."
+        },
+        {
+          "year": "2019",
+          "label": "Réforme législative",
+          "description": "Contribution à l'élaboration de lois protégeant les droits des femmes et des enfants."
+        },
+        {
+          "year": "2024",
+          "label": "Le nouvel horizon",
+          "description": "Lancement de l'initiative « Algérie Future » pour dessiner les contours de l'État moderne."
+        }
+      ]
+    },
+    "activities": {
+      "title": "Activités de terrain",
+      "items": [
+        {
+          "tag": "Jeunesse",
+          "year": "2024",
+          "title": "Incubateur « Le Carrefour »",
+          "description": "Lancement de clubs de programmation dans les écoles primaires."
+        },
+        {
+          "tag": "Social",
+          "year": "2023",
+          "title": "Autonomisation des entrepreneures",
+          "description": "Formation de plus de 300 femmes au marketing digital et au e-commerce."
+        },
+        {
+          "tag": "Environnement",
+          "year": "2022",
+          "title": "Planter un million d'arbres",
+          "description": "Initiative nationale de reboisement et de lutte contre la désertification avec la jeunesse de la société civile."
+        },
+        {
+          "tag": "Caritatif",
+          "year": "2021",
+          "title": "Campagne « Hiver chaleureux »",
+          "description": "Distribution de plus de 5 000 colis alimentaires et vestimentaires aux familles des zones d'ombre."
+        }
+      ]
+    },
+    "footer": {
+      "name": "Madame La Candidate",
+      "description": "Pour une Algérie forte, prospère et juste pour tous ses enfants. Ensemble, nous faisons le changement.",
+      "quickLinks": "Liens rapides",
+      "contact": "Contactez-nous",
+      "copyright": "© 2024 Tous droits réservés"
+    }
+  }
