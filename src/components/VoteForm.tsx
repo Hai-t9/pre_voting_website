@@ -33,7 +33,7 @@ export default function VoteForm() {
         w.code.includes(q) ||
         w.ar.includes(wilayaQuery.trim()) ||
         w.en.toLowerCase().includes(q) ||
-        w.fr.toLowerCase().includes(q)
+        w.fr.toLowerCase().includes(q),
     );
   }, [wilayaQuery]);
 
@@ -89,14 +89,20 @@ export default function VoteForm() {
           </p>
 
           {status === "success" ? (
-            <p className="text-center font-cairo font-bold text-secondary py-8">{t("success")}</p>
+            <p className="text-center font-cairo font-bold text-secondary py-8">
+              {t("success")}
+            </p>
           ) : status === "duplicate" ? (
-            <p className="text-center font-cairo font-bold text-error py-8">{t("duplicate")}</p>
+            <p className="text-center font-cairo font-bold text-error py-8">
+              {t("duplicate")}
+            </p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Full name */}
               <div>
-                <label className="block font-inter text-sm font-semibold mb-1">{t("fullName")}</label>
+                <label className="block font-inter text-sm font-semibold mb-1">
+                  {t("fullName")}
+                </label>
                 <input
                   type="text"
                   value={fullName}
@@ -111,7 +117,9 @@ export default function VoteForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Searchable wilaya combobox */}
                 <div className="relative">
-                  <label className="block font-inter text-sm font-semibold mb-1">{t("wilaya")}</label>
+                  <label className="block font-inter text-sm font-semibold mb-1">
+                    {t("wilaya")}
+                  </label>
                   <input
                     type="text"
                     value={wilayaQuery}
@@ -131,7 +139,9 @@ export default function VoteForm() {
                   {showDropdown && (
                     <ul className="absolute z-10 mt-1 w-full max-h-56 overflow-y-auto bg-surface border border-outline-light rounded-sm shadow-whisper">
                       {filteredWilayas.length === 0 && (
-                        <li className="px-4 py-2 text-sm text-charcoal/50">—</li>
+                        <li className="px-4 py-2 text-sm text-charcoal/50">
+                          —
+                        </li>
                       )}
                       {filteredWilayas.map((w) => (
                         <li
@@ -148,7 +158,9 @@ export default function VoteForm() {
 
                 {/* Email */}
                 <div>
-                  <label className="block font-inter text-sm font-semibold mb-1">{t("email")}</label>
+                  <label className="block font-inter text-sm font-semibold mb-1">
+                    {t("email")}
+                  </label>
                   <input
                     type="email"
                     value={email}
@@ -163,7 +175,9 @@ export default function VoteForm() {
 
               {/* Would vote */}
               <div>
-                <label className="block font-inter text-sm font-semibold mb-1">{t("wouldVote")}</label>
+                <label className="block font-inter text-sm font-semibold mb-1">
+                  {t("wouldVote")}
+                </label>
                 <select
                   value={wouldVote}
                   onChange={(e) => setWouldVote(e.target.value)}
@@ -183,7 +197,9 @@ export default function VoteForm() {
 
               {/* Message */}
               <div>
-                <label className="block font-inter text-sm font-semibold mb-1">{t("message")}</label>
+                <label className="block font-inter text-sm font-semibold mb-1">
+                  {t("message")}
+                </label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
