@@ -1,53 +1,147 @@
-import { supabase } from '@/lib/supabase'
-import { NextResponse } from 'next/server'
+import { supabase } from "@/lib/supabase";
+import { NextResponse } from "next/server";
+
+// Simple in-memory rate limiter (resets on server restart)
+const rateLimit = new Map<string, number>();
+const RATE_LIMIT_WINDOW = 60_000; // 60 seconds
+
+// Cleanup old entries every 5 minutes
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, time] of rateLimit) {
+    if (now - time > RATE_LIMIT_WINDOW) rateLimit.delete(key);
+  }
+}, 300_000);
+
+// GET keeps the function warm (called by cron job every 5 min)
+export async function GET() {
+  return NextResponse.json({ status: "ok", service: "vote-api" });
+}
 
 export async function POST(request: Request) {
-  const { fullName, email, wilayaCode, wouldVote, message, locale } = await request.json()
+  const {
+    firstName,
+    lastName,
+    phone,
+    wilayaCode,
+    wouldVote,
+    message,
+    locale,
+    turnstileToken,
+  } = await request.json();
 
   // Validate required fields
-  if (!fullName || !email || !wilayaCode || !wouldVote) {
+  if (!firstName || !lastName || !phone || !wilayaCode || !wouldVote) {
     return NextResponse.json(
-      { error: 'All fields are required' },
-      { status: 400 }
-    )
+      { error: "All fields are required" },
+      { status: 400 },
+    );
   }
 
-  // Basic email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email)) {
+  // Algerian phone number validation
+  const phoneClean = phone.replace(/[\s\-()]/g, "");
+  const isAlgerianPhone =
+    /^(05|06|07|02|03|04|08|09)[0-9]{8}$/.test(phoneClean) ||
+    /^\+213[567023489][0-9]{8}$/.test(phoneClean);
+  if (!isAlgerianPhone) {
     return NextResponse.json(
-      { error: 'Invalid email address' },
-      { status: 400 }
-    )
+      {
+        error:
+          "Invalid phone number. Must be an Algerian number (e.g., 05XX XX XX XX)",
+      },
+      { status: 400 },
+    );
+  }
+
+  // Rate limiting by IP
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
+
+  const lastSubmission = rateLimit.get(ip);
+  if (lastSubmission && Date.now() - lastSubmission < RATE_LIMIT_WINDOW) {
+    return NextResponse.json(
+      { error: "Too many attempts. Please wait before voting again." },
+      { status: 429 },
+    );
+  }
+
+  // Verify Turnstile token
+  if (process.env.TURNSTILE_SECRET_KEY) {
+    const turnstileRes = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          secret: process.env.TURNSTILE_SECRET_KEY,
+          response: turnstileToken,
+        }),
+      },
+    );
+    const turnstileData = await turnstileRes.json();
+
+    if (!turnstileData.success) {
+      return NextResponse.json(
+        { error: "Security check failed. Please try again." },
+        { status: 403 },
+      );
+    }
   }
 
   // Insert into Supabase
   const { data, error } = await supabase
-    .from('votes')
+    .from("votes")
     .insert({
-      full_name: fullName.trim(),
-      email: email.trim().toLowerCase(),
+      first_name: firstName.trim(),
+      last_name: lastName.trim(),
+      phone: phone.trim(),
       wilaya_code: wilayaCode,
       would_vote: wouldVote,
       message: message?.trim() || null,
       locale: locale || null,
     })
-    .select()
+    .select();
 
   if (error) {
     // Unique violation = duplicate email
-    if (error.code === '23505') {
+    if (error.code === "23505") {
       return NextResponse.json(
-        { error: 'You have already voted!' },
-        { status: 409 }
-      )
+        { error: "You have already voted!" },
+        { status: 409 },
+      );
     }
 
     return NextResponse.json(
-      { error: 'Something went wrong. Please try again.' },
-      { status: 500 }
-    )
+      { error: "Something went wrong. Please try again." },
+      { status: 500 },
+    );
   }
 
-  return NextResponse.json({ success: true, message: 'Thanks for voting! 🎉', data })
+  // Record successful attempt for rate limiting
+  rateLimit.set(ip, Date.now());
+
+  // Backup to Google Sheets (fire and forget)
+  if (process.env.GOOGLE_SHEETS_WEBHOOK_URL) {
+    fetch(process.env.GOOGLE_SHEETS_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        phone,
+        wilayaCode,
+        wouldVote,
+        message,
+        locale,
+      }),
+    }).catch(() => {});
+  }
+
+  return NextResponse.json({
+    success: true,
+    message: "Thanks for voting! 🎉",
+    data,
+  });
 }

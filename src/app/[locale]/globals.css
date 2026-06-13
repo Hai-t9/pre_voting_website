@@ -7,18 +7,71 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 /* Default body font swaps based on dir for correct script rendering */
 html[dir="rtl"] body {
-  font-family: "IBM Plex Arabic", sans-serif;
+    font-family: "IBM Plex Arabic", sans-serif;
 }
 html[dir="ltr"] body {
-  font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 /* Headings always use Cairo regardless of language */
-h1, h2, h3, .font-headline {
-  font-family: "Cairo", sans-serif;
+h1,
+h2,
+h3,
+.font-headline {
+    font-family: "Cairo", sans-serif;
+}
+
+/* Success animation: circle scales from 0 to 100% */
+@keyframes scale-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    80% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-scale-in {
+    animation: scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Checkmark stroke draw animation */
+@keyframes draw-check {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.animate-draw-check {
+    animation: draw-check 0.5s ease-out 0.4s forwards;
+}
+
+/* Subtle glow pulse around the circle */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 16px rgba(22, 163, 74, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 1.2s ease-out 0.3s;
 }

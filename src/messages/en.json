@@ -1,122 +1,125 @@
 {
-    "nav": {
-      "brand": "Madame La Candidate",
-      "vision": "Vision",
-      "about": "About",
-      "commitment": "Commitment",
-      "initiatives": "Initiatives",
-      "voteNow": "Vote Now"
+  "nav": {
+    "brand": "Madame La Candidate",
+    "vision": "Vision",
+    "about": "About",
+    "commitment": "Commitment",
+    "initiatives": "Initiatives",
+    "voteNow": "Vote Now"
+  },
+  "hero": {
+    "title": "Building Today's Algeria, the Foundation of Tomorrow, with Dignity and Pride",
+    "subtitle": "A national project placing citizens at the heart of development, aimed at strengthening national sovereignty, advancing the digital economy, and empowering youth in decision-making.",
+    "cta": "Add Your Voice"
+  },
+  "voteForm": {
+    "title": "Pledge of Commitment",
+    "subtitle": "Join the list of supporters to build a better future for all Algerians together",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "First name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Last name",
+    "wilaya": "Wilaya",
+    "wilayaPlaceholder": "Select your wilaya",
+    "phone": "Phone Number",
+    "phonePlaceholder": "05XX XX XX XX",
+    "phoneError": "Invalid number. Must be an Algerian phone (e.g., 05XX XX XX XX)",
+    "wouldVote": "Would you vote for us?",
+    "wouldVotePlaceholder": "Choose an answer",
+    "wouldVoteOptions": {
+      "yes": "Yes, I would vote for you",
+      "likely": "Most likely yes",
+      "moreInfo": "I'd like to know more first"
     },
-    "hero": {
-      "title": "Building Today's Algeria, the Foundation of Tomorrow, with Dignity and Pride",
-      "subtitle": "A national project placing citizens at the heart of development, aimed at strengthening national sovereignty, advancing the digital economy, and empowering youth in decision-making.",
-      "cta": "Add Your Voice"
-    },
-    "voteForm": {
-      "title": "Pledge of Commitment",
-      "subtitle": "Join the list of supporters to build a better future for all Algerians together",
-      "fullName": "Full Name",
-      "fullNamePlaceholder": "Enter your full name",
-      "wilaya": "Wilaya",
-      "wilayaPlaceholder": "Select your wilaya",
-      "email": "Email",
-      "emailPlaceholder": "example@mail.com",
-      "wouldVote": "Would you vote for us?",
-      "wouldVotePlaceholder": "Choose an answer",
-      "wouldVoteOptions": {
-        "yes": "Yes, I would vote for you",
-        "likely": "Most likely yes",
-        "moreInfo": "I'd like to know more first"
+    "message": "Additional Comment (optional)",
+    "messagePlaceholder": "Share your suggestion or words of encouragement...",
+    "submit": "Add My Voice",
+    "success": "Your vote has been successfully recorded.",
+    "error": "Something went wrong, please try again",
+    "duplicate": "You have already submitted your voice!"
+  },
+  "vision": {
+    "title": "Our Vision for the Future",
+    "cards": [
+      {
+        "title": "Economic Dignity",
+        "description": "Improving citizens' purchasing power and supporting national production to reduce dependency on imports."
       },
-      "message": "Additional Comment (optional)",
-      "messagePlaceholder": "Share your suggestion or words of encouragement...",
-      "submit": "Add My Voice",
-      "success": "Thank you! Your voice has been recorded 🎉",
-      "error": "Something went wrong, please try again",
-      "duplicate": "You have already submitted your voice!"
-    },
-    "vision": {
-      "title": "Our Vision for the Future",
-      "cards": [
-        {
-          "title": "Economic Dignity",
-          "description": "Improving citizens' purchasing power and supporting national production to reduce dependency on imports."
-        },
-        {
-          "title": "Local Development",
-          "description": "Fair distribution of wealth among wilayas and empowering municipal councils with financial autonomy."
-        },
-        {
-          "title": "Youth & Education",
-          "description": "Modernizing curricula, supporting startups, and aligning education with the modern job market."
-        },
-        {
-          "title": "Accountability & Transparency",
-          "description": "Strengthening institutional oversight and guaranteeing citizens' right to access information and public data."
-        }
-      ]
-    },
-    "timeline": {
-      "title": "A Journey of Activism and Fieldwork",
-      "intro": "Madame La Candidate has dedicated her life to public service through community engagement and purposeful political activism, believing that change begins with genuine will and shared action among all segments of Algerian society.",
-      "imageCaption": "Fieldwork is the foundation of change",
-      "items": [
-        {
-          "year": "2010",
-          "label": "The Beginnings",
-          "description": "Founded the 'Hope' association to support productive families in rural areas."
-        },
-        {
-          "year": "2015",
-          "label": "Municipal Work",
-          "description": "Elected to the Municipal People's Assembly and headed the Social Affairs Committee."
-        },
-        {
-          "year": "2019",
-          "label": "Legislative Reform",
-          "description": "Contributed to drafting laws protecting the rights of women and children."
-        },
-        {
-          "year": "2024",
-          "label": "New Horizons",
-          "description": "Launched the 'Future Algeria' initiative to shape the features of the modern state."
-        }
-      ]
-    },
-    "activities": {
-      "title": "Field Activities",
-      "items": [
-        {
-          "tag": "Youth",
-          "year": "2024",
-          "title": "'The Hub' Incubator",
-          "description": "Launching coding clubs in primary schools."
-        },
-        {
-          "tag": "Social",
-          "year": "2023",
-          "title": "Empowering Women Entrepreneurs",
-          "description": "Trained over 300 women in digital marketing and e-commerce."
-        },
-        {
-          "tag": "Environment",
-          "year": "2022",
-          "title": "Planting a Million Trees",
-          "description": "A national reforestation initiative to combat desertification with civil society youth."
-        },
-        {
-          "tag": "Charity",
-          "year": "2021",
-          "title": "'Warm Winter' Campaign",
-          "description": "Distributed over 5,000 food and clothing packages to families in shadow areas."
-        }
-      ]
-    },
-    "footer": {
-      "name": "Madame La Candidate",
-      "description": "For a strong, prosperous, and just Algeria for all its children. Together, we make change.",
-      "quickLinks": "Quick Links",
-      "contact": "Contact Us",
-      "copyright": "© 2024 All Rights Reserved"
-    }
+      {
+        "title": "Local Development",
+        "description": "Fair distribution of wealth among wilayas and empowering municipal councils with financial autonomy."
+      },
+      {
+        "title": "Youth & Education",
+        "description": "Modernizing curricula, supporting startups, and aligning education with the modern job market."
+      },
+      {
+        "title": "Accountability & Transparency",
+        "description": "Strengthening institutional oversight and guaranteeing citizens' right to access information and public data."
+      }
+    ]
+  },
+  "timeline": {
+    "title": "A Journey of Activism and Fieldwork",
+    "intro": "Madame La Candidate has dedicated her life to public service through community engagement and purposeful political activism, believing that change begins with genuine will and shared action among all segments of Algerian society.",
+    "imageCaption": "Fieldwork is the foundation of change",
+    "items": [
+      {
+        "year": "2010",
+        "label": "The Beginnings",
+        "description": "Founded the 'Hope' association to support productive families in rural areas."
+      },
+      {
+        "year": "2015",
+        "label": "Municipal Work",
+        "description": "Elected to the Municipal People's Assembly and headed the Social Affairs Committee."
+      },
+      {
+        "year": "2019",
+        "label": "Legislative Reform",
+        "description": "Contributed to drafting laws protecting the rights of women and children."
+      },
+      {
+        "year": "2024",
+        "label": "New Horizons",
+        "description": "Launched the 'Future Algeria' initiative to shape the features of the modern state."
+      }
+    ]
+  },
+  "activities": {
+    "title": "Field Activities",
+    "items": [
+      {
+        "tag": "Youth",
+        "year": "2024",
+        "title": "'The Hub' Incubator",
+        "description": "Launching coding clubs in primary schools."
+      },
+      {
+        "tag": "Social",
+        "year": "2023",
+        "title": "Empowering Women Entrepreneurs",
+        "description": "Trained over 300 women in digital marketing and e-commerce."
+      },
+      {
+        "tag": "Environment",
+        "year": "2022",
+        "title": "Planting a Million Trees",
+        "description": "A national reforestation initiative to combat desertification with civil society youth."
+      },
+      {
+        "tag": "Charity",
+        "year": "2021",
+        "title": "'Warm Winter' Campaign",
+        "description": "Distributed over 5,000 food and clothing packages to families in shadow areas."
+      }
+    ]
+  },
+  "footer": {
+    "name": "Madame La Candidate",
+    "description": "For a strong, prosperous, and just Algeria for all its children. Together, we make change.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact Us",
+    "copyright": "© 2024 All Rights Reserved"
   }
+}

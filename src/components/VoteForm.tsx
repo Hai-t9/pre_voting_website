@@ -1,10 +1,12 @@
 // src/components/VoteForm.tsx
-// "Pledge of Commitment" form: name, searchable wilaya combobox, email,
+// "Pledge of Commitment" form: name, searchable wilaya combobox, phone,
 // "would you vote" select, optional message, and submit to /api/vote.
 "use client";
 
-import { useState, useMemo, FormEvent } from "react";
+import { useState, useMemo, FormEvent, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { Turnstile } from "@marsidev/react-turnstile";
+import VoteSuccess from "@/components/VoteSuccess";
 import { wilayas } from "@/data/wilayas";
 
 type Status = "idle" | "loading" | "success" | "error" | "duplicate";
@@ -13,40 +15,86 @@ export default function VoteForm() {
   const t = useTranslations("voteForm");
   const locale = useLocale() as "ar" | "en" | "fr";
 
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
   const [wouldVote, setWouldVote] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef<HTMLDivElement>(null);
 
   // Wilaya combobox state
   const [wilayaQuery, setWilayaQuery] = useState("");
   const [wilayaCode, setWilayaCode] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // Filter wilayas dynamically by code, ar/en/fr name, matching the typed query
+  // Filter and sort wilayas by name match priority
   const filteredWilayas = useMemo(() => {
     const q = wilayaQuery.trim().toLowerCase();
     if (!q) return wilayas;
-    return wilayas.filter(
+
+    const matches = wilayas.filter(
       (w) =>
-        w.code.includes(q) ||
-        w.ar.includes(wilayaQuery.trim()) ||
         w.en.toLowerCase().includes(q) ||
-        w.fr.toLowerCase().includes(q),
+        w.fr.toLowerCase().includes(q) ||
+        w.ar.includes(wilayaQuery.trim()) ||
+        w.code.includes(q),
     );
+
+    // Sort: name starts with query first, then name contains query, then code match
+    return matches.sort((a, b) => {
+      const aEn = a.en.toLowerCase();
+      const bEn = b.en.toLowerCase();
+
+      const aStarts = aEn.startsWith(q);
+      const bStarts = bEn.startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      const aContains = aEn.includes(q);
+      const bContains = bEn.includes(q);
+      if (aContains && !bContains) return -1;
+      if (!aContains && bContains) return 1;
+
+      return a.en.localeCompare(b.en);
+    });
   }, [wilayaQuery]);
 
   const selectWilaya = (code: string) => {
     const w = wilayas.find((w) => w.code === code)!;
     setWilayaCode(code);
-    setWilayaQuery(`${w.code} - ${w[locale]}`);
+    setWilayaQuery(`${w[locale]} (${w.code})`);
     setShowDropdown(false);
+  };
+
+  // Validate Algerian phone number
+  const isValidAlgerianPhone = (num: string) => {
+    const clean = num.replace(/[\s\-()]/g, "");
+    return (
+      /^(05|06|07|02|03|04|08|09)[0-9]{8}$/.test(clean) ||
+      /^\+213[567023489][0-9]{8}$/.test(clean)
+    );
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!fullName || !email || !wilayaCode || !wouldVote) return;
+    if (!firstName || !lastName || !phone || !wilayaCode || !wouldVote) return;
+
+    // Frontend phone validation
+    if (phone && !isValidAlgerianPhone(phone)) {
+      setStatus("error");
+      setErrorMessage(t("phoneError"));
+      return;
+    }
+
+    // Check Turnstile
+    if (!turnstileToken) {
+      setStatus("error");
+      setErrorMessage("Please complete the security check.");
+      return;
+    }
 
     setStatus("loading");
     try {
@@ -54,24 +102,33 @@ export default function VoteForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName,
-          email,
+          firstName,
+          lastName,
+          phone,
           wilayaCode,
           wouldVote,
           message,
           locale,
+          turnstileToken,
         }),
       });
 
+      const data = await res.json();
+
       if (res.status === 409) {
         setStatus("duplicate");
+        setErrorMessage(data.error || "You have already voted!");
       } else if (!res.ok) {
         setStatus("error");
+        setErrorMessage(
+          data.error || "Something went wrong. Please try again.",
+        );
       } else {
         setStatus("success");
       }
     } catch {
       setStatus("error");
+      setErrorMessage("Network error. Please check your connection.");
     }
   };
 
@@ -89,28 +146,43 @@ export default function VoteForm() {
           </p>
 
           {status === "success" ? (
-            <p className="text-center font-cairo font-bold text-secondary py-8">
-              {t("success")}
-            </p>
+            <div className="py-4">
+              <VoteSuccess message={t("success")} />
+            </div>
           ) : status === "duplicate" ? (
             <p className="text-center font-cairo font-bold text-error py-8">
               {t("duplicate")}
             </p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Full name */}
-              <div>
-                <label className="block font-inter text-sm font-semibold mb-1">
-                  {t("fullName")}
-                </label>
-                <input
-                  type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder={t("fullNamePlaceholder")}
-                  required
-                  className="w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-plexArabic focus:border-primary focus:outline-none"
-                />
+              {/* First & Last name */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label className="block font-inter text-sm font-semibold mb-1">
+                    {t("firstName")}
+                  </label>
+                  <input
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder={t("firstNamePlaceholder")}
+                    required
+                    className="w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-plexArabic focus:border-primary focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-inter text-sm font-semibold mb-1">
+                    {t("lastName")}
+                  </label>
+                  <input
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder={t("lastNamePlaceholder")}
+                    required
+                    className="w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-plexArabic focus:border-primary focus:outline-none"
+                  />
+                </div>
               </div>
 
               {/* Wilaya + Email */}
@@ -146,26 +218,28 @@ export default function VoteForm() {
                       {filteredWilayas.map((w) => (
                         <li
                           key={w.code}
-                          onClick={() => selectWilaya(w.code)}
+                          onMouseDown={() => selectWilaya(w.code)}
                           className="px-4 py-2 text-sm font-plexArabic hover:bg-background cursor-pointer"
                         >
-                          {w.code} - {w[locale]}
+                          {w[locale]} ({w.code})
                         </li>
                       ))}
                     </ul>
                   )}
                 </div>
 
-                {/* Email */}
+                {/* Phone */}
                 <div>
                   <label className="block font-inter text-sm font-semibold mb-1">
-                    {t("email")}
+                    {t("phone")}
                   </label>
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t("emailPlaceholder")}
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder={t("phonePlaceholder")}
+                    pattern="[0-9\s\-()+]{10,}"
+                    title="Algerian phone number (e.g., 05XX XX XX XX)"
                     required
                     dir="ltr"
                     className="w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-inter text-start focus:border-primary focus:outline-none"
@@ -210,8 +284,17 @@ export default function VoteForm() {
               </div>
 
               {status === "error" && (
-                <p className="text-error text-sm font-inter">{t("error")}</p>
+                <p className="text-error text-sm font-inter">{errorMessage}</p>
               )}
+
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                onSuccess={(token) => setTurnstileToken(token)}
+                options={{
+                  theme: "light",
+                  size: "normal",
+                }}
+              />
 
               <button
                 type="submit"
