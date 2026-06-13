@@ -19,16 +19,8 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const {
-    firstName,
-    lastName,
-    phone,
-    wilayaCode,
-    wouldVote,
-    message,
-    locale,
-    turnstileToken,
-  } = await request.json();
+  const { firstName, lastName, phone, wilayaCode, wouldVote, message, locale } =
+    await request.json();
 
   // Validate required fields
   if (!firstName || !lastName || !phone || !wilayaCode || !wouldVote) {
@@ -65,29 +57,6 @@ export async function POST(request: Request) {
       { error: "Too many attempts. Please wait before voting again." },
       { status: 429 },
     );
-  }
-
-  // Verify Turnstile token
-  if (process.env.TURNSTILE_SECRET_KEY) {
-    const turnstileRes = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          secret: process.env.TURNSTILE_SECRET_KEY,
-          response: turnstileToken,
-        }),
-      },
-    );
-    const turnstileData = await turnstileRes.json();
-
-    if (!turnstileData.success) {
-      return NextResponse.json(
-        { error: "Security check failed. Please try again." },
-        { status: 403 },
-      );
-    }
   }
 
   // Insert into Supabase

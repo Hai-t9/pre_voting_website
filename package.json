@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@marsidev/react-turnstile": "^1.5.3",
     "@supabase/supabase-js": "^2",
     "next": "14.2.35",
     "next-intl": "^4.13.0",

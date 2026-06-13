@@ -5,7 +5,6 @@
 
 import { useState, useMemo, FormEvent } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { Turnstile } from "@marsidev/react-turnstile";
 import VoteSuccess from "@/components/VoteSuccess";
 import { wilayas } from "@/data/wilayas";
 
@@ -22,7 +21,6 @@ export default function VoteForm() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [turnstileToken, setTurnstileToken] = useState("");
 
   // Wilaya combobox state
   const [wilayaQuery, setWilayaQuery] = useState("");
@@ -88,13 +86,6 @@ export default function VoteForm() {
       return;
     }
 
-    // Check Turnstile
-    if (!turnstileToken) {
-      setStatus("error");
-      setErrorMessage("Please complete the security check.");
-      return;
-    }
-
     setStatus("loading");
     try {
       const res = await fetch("/api/vote", {
@@ -108,7 +99,6 @@ export default function VoteForm() {
           wouldVote,
           message,
           locale,
-          turnstileToken,
         }),
       });
 
@@ -285,15 +275,6 @@ export default function VoteForm() {
               {status === "error" && (
                 <p className="text-error text-sm font-inter">{errorMessage}</p>
               )}
-
-              <Turnstile
-                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-                onSuccess={(token) => setTurnstileToken(token)}
-                options={{
-                  theme: "light",
-                  size: "normal",
-                }}
-              />
 
               <button
                 type="submit"
