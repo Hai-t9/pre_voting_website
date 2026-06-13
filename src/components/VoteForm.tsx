@@ -3,7 +3,7 @@
 // "would you vote" select, optional message, and submit to /api/vote.
 "use client";
 
-import { useState, useMemo, FormEvent, useRef } from "react";
+import { useState, useMemo, FormEvent } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Turnstile } from "@marsidev/react-turnstile";
 import VoteSuccess from "@/components/VoteSuccess";
@@ -23,7 +23,6 @@ export default function VoteForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
-  const turnstileRef = useRef<HTMLDivElement>(null);
 
   // Wilaya combobox state
   const [wilayaQuery, setWilayaQuery] = useState("");
