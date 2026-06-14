@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 // Simple in-memory rate limiter (resets on server restart)
 const rateLimit = new Map<string, number>();
-const RATE_LIMIT_WINDOW = 60_000; // 60 seconds
+const RATE_LIMIT_WINDOW = 10_000; // 10 seconds
 
 // Cleanup old entries every 5 minutes
 setInterval(() => {
