@@ -115,9 +115,13 @@ export default function VoteForm() {
       } else {
         setStatus("success");
       }
-    } catch {
+    } catch (err) {
       setStatus("error");
-      setErrorMessage("Network error. Please check your connection.");
+      setErrorMessage(
+        err instanceof Error
+          ? err.message
+          : "Network error. Please check your connection.",
+      );
     }
   };
 
