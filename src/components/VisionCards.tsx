@@ -38,20 +38,24 @@ export default function VisionCards() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cards.map((card, i) => (
-            
-            <div key={i} 
-            className="flex flex-col bg-gradient-to-b from-surface to-transparent shadow-[0_-4px_10px_-2px_rgba(0,0,0,0.05)] rounded-t-lg overflow-hidden">            {/* Secondary line matching card width at the very top */}
-        <span className="h-1 w-full bg-secondary block" />
-            <div className="p-6">
-              <div className="w-12 h-12 rounded-sm bg-secondary/20 text-primary-on flex items-center justify-center mb-4">
-                {icons[i]}
-              </div>
-              <h3 className="font-cairo font-bold text-lg mb-2">{card.title}</h3>
-              <p className="font-plexArabic text-sm text-charcoal/80">{card.description}</p>
-            </div>
-            </div>
-          ))}
+        {cards.map((card, i) => (
+  <div
+    key={i}
+    className="group flex flex-col bg-gradient-to-b from-surface to-transparent shadow-[0_-4px_10px_-2px_rgba(0,0,0,0.05)] rounded-t-lg overflow-hidden transition-transform duration-300 hover:-translate-y-4"
+  >
+    {/* 2. Added 'transition-all duration-300' for a smooth height change, and 'group-hover:h-4' */}
+    <span className="h-1 w-full bg-secondary block transition-all duration-300 group-hover:h-2" />
+    
+    <div className="p-6">
+      <div className="w-12 h-12 rounded-sm bg-secondary/20 text-primary-on flex items-center justify-center mb-4">
+        {icons[i]}
+      </div>
+      <h3 className="font-cairo font-bold text-lg mb-2">{card.title}</h3>
+      <p className="font-plexArabic text-sm text-charcoal/80">{card.description}</p>
+    </div>
+  </div>
+))}
+
         </div>
 
 

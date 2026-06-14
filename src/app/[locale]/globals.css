@@ -10,6 +10,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 /* Default body font swaps based on dir for correct script rendering */
 html[dir="rtl"] body {
   font-family: "IBM Plex Arabic", sans-serif;
@@ -21,4 +25,15 @@ html[dir="ltr"] body {
 /* Headings always use Cairo regardless of language */
 h1, h2, h3, .font-headline {
   font-family: "Cairo", sans-serif;
+}
+
+@keyframes draw-loop {
+  0%   { stroke-dashoffset: var(--path-length); }
+  45%  { stroke-dashoffset: 0; }
+  55%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: var(--path-length); }
+}
+@keyframes draw-final {
+  0%   { stroke-dashoffset: var(--path-length); }
+  100% { stroke-dashoffset: 0; }
 }
