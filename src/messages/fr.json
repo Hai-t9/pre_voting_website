@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Madame La Candidate",
+    "brand": "Kehal Amina",
     "vision": "Vision",
     "about": "À propos",
     "commitment": "Engagement",
@@ -60,29 +60,29 @@
     ]
   },
   "timeline": {
-    "title": "Un parcours de militantisme et d'action de terrain",
-    "intro": "Madame La Candidate a consacré sa vie au service public à travers l'engagement associatif et une action politique porteuse de sens, convaincue que le changement naît d'une volonté sincère et d'une action commune entre toutes les composantes du peuple algérien.",
+    "title": "Un parcours d'engagement et d'action de terrain",
+    "intro": "Kehal Amina, architecte et militante politique d'El Milia, wilaya de Jijel. Elle a consacré sa carrière au service du développement local, de l'urbanisme et de la construction jusqu'à l'action législative et sociale à l'Assemblée Populaire de Wilaya. Elle croit que le changement commence sur le terrain, au plus près du citoyen.",
     "imageCaption": "L'action de terrain est le fondement du changement",
     "items": [
       {
-        "year": "2010",
-        "label": "Les débuts",
-        "description": "Fondation de l'association « Espoir » pour soutenir les familles productrices en zones rurales."
+        "year": "2008",
+        "label": "Formation académique",
+        "description": "Obtention du diplôme d'architecte à l'Université de Jijel, début d'une carrière remarquable au service du développement local."
       },
       {
-        "year": "2015",
+        "year": "2012",
         "label": "Action municipale",
-        "description": "Élue au conseil populaire municipal et présidente de la commission des affaires sociales."
+        "description": "Recrutée comme architecte à l'APC d'El Milia, elle devient chef de service urbanisme puis directrice de l'urbanisme, de la construction et des travaux jusqu'en 2021."
       },
       {
-        "year": "2019",
-        "label": "Réforme législative",
-        "description": "Contribution à l'élaboration de lois protégeant les droits des femmes et des enfants."
+        "year": "2017",
+        "label": "Assemblée Populaire de Wilaya",
+        "description": "Élue membre de l'APW de Jijel sous la liste du Front de Libération Nationale pour le mandat 2017-2021."
       },
       {
-        "year": "2024",
-        "label": "Le nouvel horizon",
-        "description": "Lancement de l'initiative « Algérie Future » pour dessiner les contours de l'État moderne."
+        "year": "2021",
+        "label": "Présidence de commission",
+        "description": "Renouvelée dans son mandat et nommée présidente de la commission des affaires sociales, culturelles, religieuses, sportives et de la jeunesse à l'APW de Jijel."
       }
     ]
   },
@@ -90,36 +90,36 @@
     "title": "Activités de terrain",
     "items": [
       {
-        "tag": "Jeunesse",
-        "year": "2024",
-        "title": "Incubateur « Le Carrefour »",
-        "description": "Lancement de clubs de programmation dans les écoles primaires."
+        "tag": "Urbanisme",
+        "year": "2016",
+        "title": "Direction de l'urbanisme",
+        "description": "Directrice de l'urbanisme, de la construction et des travaux à l'APC d'El Milia, supervisant les projets d'infrastructure pour améliorer le cadre de vie des citoyens."
       },
       {
         "tag": "Social",
-        "year": "2023",
-        "title": "Autonomisation des entrepreneures",
-        "description": "Formation de plus de 300 femmes au marketing digital et au e-commerce."
-      },
-      {
-        "tag": "Environnement",
         "year": "2022",
-        "title": "Planter un million d'arbres",
-        "description": "Initiative nationale de reboisement et de lutte contre la désertification avec la jeunesse de la société civile."
+        "title": "Soutien aux familles nécessiteuses",
+        "description": "Pilotage de programmes d'aide sociale aux familles défavorisées de la wilaya de Jijel à travers la commission des affaires sociales de l'APW."
       },
       {
-        "tag": "Caritatif",
-        "year": "2021",
-        "title": "Campagne « Hiver chaleureux »",
-        "description": "Distribution de plus de 5 000 colis alimentaires et vestimentaires aux familles des zones d'ombre."
+        "tag": "Jeunesse",
+        "year": "2023",
+        "title": "Autonomisation des jeunes et du sport",
+        "description": "Soutien aux projets de jeunesse et organisation d'événements sportifs et culturels en coordination avec les directions de wilaya."
+      },
+      {
+        "tag": "Femmes",
+        "year": "2024",
+        "title": "La femme et la participation politique",
+        "description": "Promotion de la présence féminine dans la scène politique et locale, dans le cadre de ses responsabilités au FLN et de son rôle à l'APW."
       }
     ]
   },
   "footer": {
-    "name": "Madame La Candidate",
-    "description": "Pour une Algérie forte, prospère et juste pour tous ses enfants. Ensemble, nous faisons le changement.",
+    "name": "Kehal Amina",
+    "description": "Architecte et élue à l'APW de Jijel. Pour une Algérie forte, prospère et juste pour tous ses enfants.",
     "quickLinks": "Liens rapides",
     "contact": "Contactez-nous",
-    "copyright": "© 2024 Tous droits réservés"
+    "copyright": "© 2025 Tous droits réservés"
   }
 }

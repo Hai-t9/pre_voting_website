@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Madame La Candidate",
+    "brand": "Kehal Amina",
     "vision": "Vision",
     "about": "About",
     "commitment": "Commitment",
@@ -60,29 +60,29 @@
     ]
   },
   "timeline": {
-    "title": "A Journey of Activism and Fieldwork",
-    "intro": "Madame La Candidate has dedicated her life to public service through community engagement and purposeful political activism, believing that change begins with genuine will and shared action among all segments of Algerian society.",
+    "title": "A Journey of Dedication and Fieldwork",
+    "intro": "Kehal Amina is an architect and political figure from El Milia, Jijel. She has dedicated her career to local development — from urban planning and construction management to legislative and social work at the Provincial People's Assembly. She believes that real change begins on the ground, close to the citizen.",
     "imageCaption": "Fieldwork is the foundation of change",
     "items": [
       {
-        "year": "2010",
-        "label": "The Beginnings",
-        "description": "Founded the 'Hope' association to support productive families in rural areas."
+        "year": "2008",
+        "label": "Academic Achievement",
+        "description": "Earned an Architecture Engineering degree from the University of Jijel, launching a distinguished career in local development and public service."
       },
       {
-        "year": "2015",
-        "label": "Municipal Work",
-        "description": "Elected to the Municipal People's Assembly and headed the Social Affairs Committee."
+        "year": "2012",
+        "label": "Municipal Service",
+        "description": "Joined the APC of El Milia as an architect, rising to Head of Urban Planning and then Director of Urbanism, Construction and Works until 2021."
       },
       {
-        "year": "2019",
-        "label": "Legislative Reform",
-        "description": "Contributed to drafting laws protecting the rights of women and children."
+        "year": "2017",
+        "label": "Provincial Assembly",
+        "description": "Elected as a member of the People's Provincial Assembly (APW) of Jijel under the FLN party list for the 2017–2021 term."
       },
       {
-        "year": "2024",
-        "label": "New Horizons",
-        "description": "Launched the 'Future Algeria' initiative to shape the features of the modern state."
+        "year": "2021",
+        "label": "Commission Presidency",
+        "description": "Re-elected and appointed President of the Social, Cultural, Religious, Sports and Youth Affairs Commission at the APW of Jijel."
       }
     ]
   },
@@ -90,36 +90,36 @@
     "title": "Field Activities",
     "items": [
       {
-        "tag": "Youth",
-        "year": "2024",
-        "title": "'The Hub' Incubator",
-        "description": "Launching coding clubs in primary schools."
+        "tag": "Urban Planning",
+        "year": "2016",
+        "title": "Directing Urban Development",
+        "description": "Served as Director of Urbanism, Construction and Works at El Milia municipality, overseeing infrastructure projects to improve citizens' living conditions."
       },
       {
         "tag": "Social",
-        "year": "2023",
-        "title": "Empowering Women Entrepreneurs",
-        "description": "Trained over 300 women in digital marketing and e-commerce."
-      },
-      {
-        "tag": "Environment",
         "year": "2022",
-        "title": "Planting a Million Trees",
-        "description": "A national reforestation initiative to combat desertification with civil society youth."
+        "title": "Supporting Families in Need",
+        "description": "Led social support programs for underprivileged families across Jijel through the APW Social Affairs Commission."
       },
       {
-        "tag": "Charity",
-        "year": "2021",
-        "title": "'Warm Winter' Campaign",
-        "description": "Distributed over 5,000 food and clothing packages to families in shadow areas."
+        "tag": "Youth",
+        "year": "2023",
+        "title": "Youth & Sports Empowerment",
+        "description": "Supported youth projects and organized sports and cultural events in coordination with wilaya directorates through the commission."
+      },
+      {
+        "tag": "Women",
+        "year": "2024",
+        "title": "Women in Political Life",
+        "description": "Championed women's participation in local and political life, through her responsibilities in the FLN party and her elected role at the APW."
       }
     ]
   },
   "footer": {
-    "name": "Madame La Candidate",
-    "description": "For a strong, prosperous, and just Algeria for all its children. Together, we make change.",
+    "name": "Kehal Amina",
+    "description": "Architect and elected member of the APW of Jijel. For a strong, prosperous, and just Algeria for all its children.",
     "quickLinks": "Quick Links",
     "contact": "Contact Us",
-    "copyright": "© 2024 All Rights Reserved"
+    "copyright": "© 2025 All Rights Reserved"
   }
 }
