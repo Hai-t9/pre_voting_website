@@ -1,9 +1,9 @@
 // src/components/VoteForm.tsx
-// "Pledge of Commitment" form: name, searchable wilaya combobox, phone,
-// "would you vote" select, optional message, and submit to /api/vote.
 "use client";
 
 import { useState, useMemo, FormEvent } from "react";
+// ─── COUNTER: also uncomment `useEffect` below when activating the counter ───
+// import { useState, useMemo, FormEvent, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import VoteSuccess from "@/components/VoteSuccess";
 import { wilayas } from "@/data/wilayas";
@@ -18,9 +18,28 @@ export default function VoteForm() {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [wouldVote, setWouldVote] = useState("");
+  const [municipality, setMunicipality] = useState("");
+  const [volunteerInterest, setVolunteerInterest] = useState("");
   const [message, setMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // ─── SUPPORTER COUNTER ────────────────────────────────────────────────────
+  // To activate the live counter:
+  //   1. Uncomment the `useEffect` import at the top of this file
+  //   2. Uncomment the block below
+  //   3. Uncomment the counter JSX section further down (search for COUNTER_JSX)
+  //
+  // const [supporterCount, setSupporterCount] = useState<number | null>(null);
+  // useEffect(() => {
+  //   fetch("/api/keep-alive")
+  //     .then((r) => r.json())
+  //     .then((d) => setSupporterCount(d.voteCount ?? null))
+  //     .catch(() => {});
+  // }, []);
+  // ──────────────────────────────────────────────────────────────────────────
 
   // Wilaya combobox state
   const [wilayaQuery, setWilayaQuery] = useState("");
@@ -40,21 +59,17 @@ export default function VoteForm() {
         w.code.includes(q),
     );
 
-    // Sort: name starts with query first, then name contains query, then code match
     return matches.sort((a, b) => {
       const aEn = a.en.toLowerCase();
       const bEn = b.en.toLowerCase();
-
       const aStarts = aEn.startsWith(q);
       const bStarts = bEn.startsWith(q);
       if (aStarts && !bStarts) return -1;
       if (!aStarts && bStarts) return 1;
-
       const aContains = aEn.includes(q);
       const bContains = bEn.includes(q);
       if (aContains && !bContains) return -1;
       if (!aContains && bContains) return 1;
-
       return a.en.localeCompare(b.en);
     });
   }, [wilayaQuery]);
@@ -66,7 +81,6 @@ export default function VoteForm() {
     setShowDropdown(false);
   };
 
-  // Validate Algerian phone number
   const isValidAlgerianPhone = (num: string) => {
     const clean = num.replace(/[\s\-()]/g, "");
     return (
@@ -79,10 +93,15 @@ export default function VoteForm() {
     e.preventDefault();
     if (!firstName || !lastName || !phone || !wilayaCode || !wouldVote) return;
 
-    // Frontend phone validation
     if (phone && !isValidAlgerianPhone(phone)) {
       setStatus("error");
       setErrorMessage(t("phoneError"));
+      return;
+    }
+
+    if (!consent) {
+      setStatus("error");
+      setErrorMessage(t("consentError"));
       return;
     }
 
@@ -97,6 +116,8 @@ export default function VoteForm() {
           phone,
           wilayaCode,
           wouldVote,
+          municipality,
+          volunteerInterest,
           message,
           locale,
         }),
@@ -106,12 +127,10 @@ export default function VoteForm() {
 
       if (res.status === 409) {
         setStatus("duplicate");
-        setErrorMessage(data.error || "You have already voted!");
+        setErrorMessage(data.error || t("duplicate"));
       } else if (!res.ok) {
         setStatus("error");
-        setErrorMessage(
-          data.error || "Something went wrong. Please try again.",
-        );
+        setErrorMessage(data.error || t("error"));
       } else {
         setStatus("success");
       }
@@ -122,11 +141,25 @@ export default function VoteForm() {
   };
 
   const wouldVoteOptions = t.raw("wouldVoteOptions") as Record<string, string>;
+  const volunteerOptions = t.raw("volunteerOptions") as Record<string, string>;
 
   return (
     <section id="vote" className="bg-background">
       <div className="max-w-container mx-auto px-4 md:px-16 py-16 flex justify-center">
         <div className="w-full max-w-2xl bg-surface rounded-lg shadow-whisper p-6 md:p-10">
+          {/* ── COUNTER_JSX ── To activate: uncomment the block below ──────────
+          {supporterCount !== null && (
+            <div className="text-center mb-6 py-3 bg-primary/10 rounded-lg">
+              <span className="font-cairo font-extrabold text-2xl text-primary">
+                {supporterCount.toLocaleString()}
+              </span>
+              <span className="font-plexArabic text-sm text-charcoal/70 ms-2">
+                {t("counter")}
+              </span>
+            </div>
+          )}
+          ── END COUNTER_JSX ─────────────────────────────────────────────── */}
+
           <h2 className="font-cairo font-extrabold text-2xl md:text-3xl text-center mb-2">
             {t("title")}
           </h2>
@@ -174,7 +207,7 @@ export default function VoteForm() {
                 </div>
               </div>
 
-              {/* Wilaya + Email */}
+              {/* Wilaya + Phone */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Searchable wilaya combobox */}
                 <div className="relative">
@@ -195,7 +228,6 @@ export default function VoteForm() {
                     required
                     className="w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-plexArabic focus:border-primary focus:outline-none"
                   />
-                  {/* Hidden input ensures the form requires a valid selection */}
                   <input type="hidden" value={wilayaCode} required />
                   {showDropdown && (
                     <ul className="absolute z-10 mt-1 w-full max-h-56 overflow-y-auto bg-surface border border-outline-light rounded-sm shadow-whisper">
@@ -236,6 +268,20 @@ export default function VoteForm() {
                 </div>
               </div>
 
+              {/* Municipality (optional) */}
+              <div>
+                <label className="block font-inter text-sm font-semibold mb-1">
+                  {t("municipality")}
+                </label>
+                <input
+                  type="text"
+                  value={municipality}
+                  onChange={(e) => setMunicipality(e.target.value)}
+                  placeholder={t("municipalityPlaceholder")}
+                  className="w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-plexArabic focus:border-primary focus:outline-none"
+                />
+              </div>
+
               {/* Would vote */}
               <div>
                 <label className="block font-inter text-sm font-semibold mb-1">
@@ -258,18 +304,62 @@ export default function VoteForm() {
                 </select>
               </div>
 
-              {/* Message */}
+              {/* Volunteer interest */}
               <div>
                 <label className="block font-inter text-sm font-semibold mb-1">
-                  {t("message")}
+                  {t("volunteerTitle")}
                 </label>
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder={t("messagePlaceholder")}
-                  rows={4}
+                <select
+                  value={volunteerInterest}
+                  onChange={(e) => setVolunteerInterest(e.target.value)}
                   className="w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-plexArabic focus:border-primary focus:outline-none"
+                >
+                  <option value="" disabled>
+                    {t("wouldVotePlaceholder")}
+                  </option>
+                  {Object.entries(volunteerOptions).map(([key, label]) => (
+                    <option key={key} value={key}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Message — collapsed behind a toggle */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setShowMessage((v) => !v)}
+                  className="text-sm font-inter text-primary underline underline-offset-2 hover:opacity-80"
+                >
+                  {t("messageToggle")} {showMessage ? "▲" : "▼"}
+                </button>
+                {showMessage && (
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder={t("messagePlaceholder")}
+                    rows={3}
+                    className="mt-2 w-full bg-background border border-outline-light rounded-sm px-4 py-2 font-plexArabic focus:border-primary focus:outline-none"
+                  />
+                )}
+              </div>
+
+              {/* Consent checkbox */}
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-1 w-4 h-4 accent-primary cursor-pointer shrink-0"
                 />
+                <label
+                  htmlFor="consent"
+                  className="font-plexArabic text-sm text-charcoal/80 cursor-pointer"
+                >
+                  {t("consent")}
+                </label>
               </div>
 
               {status === "error" && (

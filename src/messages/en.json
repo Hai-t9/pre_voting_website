@@ -13,30 +13,44 @@
     "cta": "Add Your Voice"
   },
   "voteForm": {
-    "title": "Pledge of Commitment",
-    "subtitle": "Join the list of supporters to build a better future for all Algerians together",
+    "title": "Register Your Support",
+    "subtitle": "Join the supporters of candidate Kehal Amina to build a better future for Algeria",
     "firstName": "First Name",
     "firstNamePlaceholder": "First name",
     "lastName": "Last Name",
     "lastNamePlaceholder": "Last name",
     "wilaya": "Wilaya",
     "wilayaPlaceholder": "Select your wilaya",
+    "municipality": "Municipality (optional)",
+    "municipalityPlaceholder": "Enter your municipality name",
     "phone": "Phone Number",
     "phonePlaceholder": "05XX XX XX XX",
     "phoneError": "Invalid number. Must be an Algerian phone (e.g., 05XX XX XX XX)",
-    "wouldVote": "Would you vote for us?",
+    "wouldVote": "Would you vote for the candidate?",
     "wouldVotePlaceholder": "Choose an answer",
     "wouldVoteOptions": {
-      "yes": "Yes, I would vote for you",
-      "likely": "Most likely yes",
-      "moreInfo": "I'd like to know more first"
+      "yes": "I will definitely vote for her",
+      "likely": "I lean towards voting for her",
+      "moreInfo": "I want to know more before deciding",
+      "unsure": "I don't know yet"
     },
-    "message": "Additional Comment (optional)",
+    "volunteerTitle": "How would you like to contribute?",
+    "volunteerOptions": {
+      "support": "Just register my support",
+      "share": "Share the campaign with friends",
+      "volunteer": "Volunteer in the campaign",
+      "field": "Help with field outreach"
+    },
+    "messageToggle": "Add a support message (optional)",
+    "message": "Support Message",
     "messagePlaceholder": "Share your suggestion or words of encouragement...",
-    "submit": "Add My Voice",
-    "success": "Your vote has been successfully recorded.",
+    "consent": "I confirm that I am offering my support voluntarily and agree to the use of my data for communication and support verification.",
+    "consentError": "You must agree to the terms to continue",
+    "submit": "Declare My Support",
+    "success": "Your support has been successfully registered. Thank you!",
     "error": "Something went wrong, please try again",
-    "duplicate": "You have already submitted your voice!"
+    "duplicate": "You have already registered your support!",
+    "counter": "citizens have registered their support so far"
   },
   "vision": {
     "title": "Our Vision for the Future",

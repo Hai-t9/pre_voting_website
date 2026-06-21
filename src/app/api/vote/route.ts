@@ -19,8 +19,17 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { firstName, lastName, phone, wilayaCode, wouldVote, message, locale } =
-    await request.json();
+  const {
+    firstName,
+    lastName,
+    phone,
+    wilayaCode,
+    wouldVote,
+    municipality,
+    volunteerInterest,
+    message,
+    locale,
+  } = await request.json();
 
   // Validate required fields
   if (!firstName || !lastName || !phone || !wilayaCode || !wouldVote) {
@@ -68,6 +77,8 @@ export async function POST(request: Request) {
       phone: phone.trim(),
       wilaya_code: wilayaCode,
       would_vote: wouldVote,
+      municipality: municipality?.trim() || null,
+      volunteer_interest: volunteerInterest || null,
       message: message?.trim() || null,
       locale: locale || null,
     })
@@ -102,6 +113,8 @@ export async function POST(request: Request) {
         phone,
         wilayaCode,
         wouldVote,
+        municipality,
+        volunteerInterest,
         message,
         locale,
       }),

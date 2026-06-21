@@ -13,30 +13,44 @@
     "cta": "Ajoutez votre voix"
   },
   "voteForm": {
-    "title": "Pacte d'Engagement",
-    "subtitle": "Rejoignez la liste des soutiens pour construire ensemble un meilleur avenir pour tous les Algériens",
+    "title": "Enregistrez votre soutien",
+    "subtitle": "Rejoignez les soutiens de la candidate Kehal Amina pour bâtir un meilleur avenir pour l'Algérie",
     "firstName": "Prénom",
     "firstNamePlaceholder": "Prénom",
     "lastName": "Nom",
     "lastNamePlaceholder": "Nom",
     "wilaya": "Wilaya",
     "wilayaPlaceholder": "Choisissez votre wilaya",
+    "municipality": "Commune (facultatif)",
+    "municipalityPlaceholder": "Entrez le nom de votre commune",
     "phone": "Numéro de téléphone",
     "phonePlaceholder": "05XX XX XX XX",
     "phoneError": "Numéro invalide. Doit être un numéro algérien (ex: 05XX XX XX XX)",
-    "wouldVote": "Voteriez-vous pour nous ?",
+    "wouldVote": "Voteriez-vous pour la candidate ?",
     "wouldVotePlaceholder": "Choisissez une réponse",
     "wouldVoteOptions": {
-      "yes": "Oui, je voterais pour vous",
-      "likely": "Probablement oui",
-      "moreInfo": "Je veux d'abord en savoir plus"
+      "yes": "Je voterai certainement pour elle",
+      "likely": "Je pencherai pour voter pour elle",
+      "moreInfo": "Je veux en savoir plus avant de décider",
+      "unsure": "Je ne sais pas encore"
     },
-    "message": "Commentaire additionnel (facultatif)",
+    "volunteerTitle": "Comment souhaitez-vous contribuer ?",
+    "volunteerOptions": {
+      "support": "Juste enregistrer mon soutien",
+      "share": "Partager la campagne avec des amis",
+      "volunteer": "Faire du bénévolat dans la campagne",
+      "field": "Aider à la communication de terrain"
+    },
+    "messageToggle": "Ajouter un message de soutien (facultatif)",
+    "message": "Message de soutien",
     "messagePlaceholder": "Partagez votre suggestion ou vos encouragements...",
-    "submit": "Ajouter ma voix",
-    "success": "Votre vote a été enregistré avec succès.",
+    "consent": "Je confirme que j'apporte mon soutien volontairement et j'accepte que mes données soient utilisées pour la communication et la vérification du soutien.",
+    "consentError": "Vous devez accepter les conditions pour continuer",
+    "submit": "Déclarer mon soutien",
+    "success": "Votre soutien a été enregistré avec succès. Merci !",
     "error": "Une erreur est survenue, veuillez réessayer",
-    "duplicate": "Vous avez déjà soumis votre voix !"
+    "duplicate": "Vous avez déjà enregistré votre soutien !",
+    "counter": "citoyens ont enregistré leur soutien jusqu'à présent"
   },
   "vision": {
     "title": "Notre vision pour l'avenir",
