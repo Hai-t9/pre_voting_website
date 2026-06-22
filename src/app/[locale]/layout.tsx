@@ -8,8 +8,9 @@ import { notFound } from "next/navigation";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "السيدة المرشحة | Madame La Candidate",
-  description: "El-Djazair Presidential 2024 Campaign",
+  title: "كحال امنة | Kehal Amina",
+  description:
+    "الحملة الانتخابية لكحال امنة - Campagne électorale de Kehal Amina",
 };
 
 export default async function LocaleLayout({
