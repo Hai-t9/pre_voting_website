@@ -1,39 +1,86 @@
 // ─── CONFIGURATION ────────────────────────────────────────────────────────────
-// Replace with your actual Supabase credentials
-const SUPABASE_URL = "https://muhgnyiafubbudiecerj.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_y4GDkI4U-SiBTfJ51PFPlA_LrYF4hf7";
+// Loaded from config.js (generated from .env.local)
+// If window values aren't set, fallback to empty (will show error)
+const SUPABASE_URL = window.SUPABASE_URL || "";
+const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || "";
 // ──────────────────────────────────────────────────────────────────────────────
 
 // ─── WILAYA NAMES (Arabic) ────────────────────────────────────────────────────
 const WILAYA_NAMES = {
-  "01":"أدرار","02":"الشلف","03":"الأغواط","04":"أم البواقي","05":"باتنة",
-  "06":"بجاية","07":"بسكرة","08":"بشار","09":"البليدة","10":"البويرة",
-  "11":"تمنراست","12":"تبسة","13":"تلمسان","14":"تيارت","15":"تيزي وزو",
-  "16":"الجزائر","17":"الجلفة","18":"جيجل","19":"سطيف","20":"سعيدة",
-  "21":"سكيكدة","22":"سيدي بلعباس","23":"عنابة","24":"قالمة","25":"قسنطينة",
-  "26":"المدية","27":"مستغانم","28":"المسيلة","29":"معسكر","30":"ورقلة",
-  "31":"وهران","32":"البيض","33":"إليزي","34":"برج بوعريريج","35":"بومرداس",
-  "36":"الطارف","37":"تندوف","38":"تيسمسيلت","39":"الوادي","40":"خنشلة",
-  "41":"سوق أهراس","42":"تيبازة","43":"ميلة","44":"عين الدفلى","45":"النعامة",
-  "46":"عين تموشنت","47":"غرداية","48":"غليزان","49":"تيميمون","50":"برج باجي مختار",
-  "51":"أولاد جلال","52":"بني عباس","53":"عين صالح","54":"عين قزام","55":"تقرت",
-  "56":"جانت","57":"المغير","58":"المنيعة"
+  "01": "أدرار",
+  "02": "الشلف",
+  "03": "الأغواط",
+  "04": "أم البواقي",
+  "05": "باتنة",
+  "06": "بجاية",
+  "07": "بسكرة",
+  "08": "بشار",
+  "09": "البليدة",
+  10: "البويرة",
+  11: "تمنراست",
+  12: "تبسة",
+  13: "تلمسان",
+  14: "تيارت",
+  15: "تيزي وزو",
+  16: "الجزائر",
+  17: "الجلفة",
+  18: "جيجل",
+  19: "سطيف",
+  20: "سعيدة",
+  21: "سكيكدة",
+  22: "سيدي بلعباس",
+  23: "عنابة",
+  24: "قالمة",
+  25: "قسنطينة",
+  26: "المدية",
+  27: "مستغانم",
+  28: "المسيلة",
+  29: "معسكر",
+  30: "ورقلة",
+  31: "وهران",
+  32: "البيض",
+  33: "إليزي",
+  34: "برج بوعريريج",
+  35: "بومرداس",
+  36: "الطارف",
+  37: "تندوف",
+  38: "تيسمسيلت",
+  39: "الوادي",
+  40: "خنشلة",
+  41: "سوق أهراس",
+  42: "تيبازة",
+  43: "ميلة",
+  44: "عين الدفلى",
+  45: "النعامة",
+  46: "عين تموشنت",
+  47: "غرداية",
+  48: "غليزان",
+  49: "تيميمون",
+  50: "برج باجي مختار",
+  51: "أولاد جلال",
+  52: "بني عباس",
+  53: "عين صالح",
+  54: "عين قزام",
+  55: "تقرت",
+  56: "جانت",
+  57: "المغير",
+  58: "المنيعة",
 };
 
 // ─── VOTE LABELS ──────────────────────────────────────────────────────────────
 const VOTE_LABELS = {
-  yes:      { ar: "سيصوت بالتأكيد",       badge: "badge-yes"    },
-  likely:   { ar: "يميل للتصويت",          badge: "badge-likely" },
-  moreInfo: { ar: "يريد المزيد",            badge: "badge-more"   },
-  unsure:   { ar: "لا يعرف بعد",           badge: "badge-unsure" },
+  yes: { ar: "سيصوت بالتأكيد", badge: "badge-yes" },
+  likely: { ar: "يميل للتصويت", badge: "badge-likely" },
+  moreInfo: { ar: "يريد المزيد", badge: "badge-more" },
+  unsure: { ar: "لا يعرف بعد", badge: "badge-unsure" },
 };
 
 // ─── VOLUNTEER LABELS ─────────────────────────────────────────────────────────
 const VOLUNTEER_LABELS = {
-  support:   "تسجيل دعم فقط",
-  share:     "مشاركة الحملة",
+  support: "تسجيل دعم فقط",
+  share: "مشاركة الحملة",
   volunteer: "تطوع",
-  field:     "تواصل ميداني",
+  field: "تواصل ميداني",
 };
 
 // ─── LOCALE LABELS ────────────────────────────────────────────────────────────
@@ -65,10 +112,10 @@ async function loadData() {
       `${SUPABASE_URL}/rest/v1/votes?select=*&order=created_at.desc&limit=10000`,
       {
         headers: {
-          "apikey": SUPABASE_ANON_KEY,
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         },
-      }
+      },
     );
 
     if (!res.ok) {
@@ -92,7 +139,6 @@ async function loadData() {
     const el = document.getElementById("lastUpdated");
     el.textContent = "آخر تحديث: " + new Date().toLocaleTimeString("ar-DZ");
     el.classList.remove("hidden");
-
   } catch (err) {
     hide("loadingState");
     show("errorState");
@@ -103,18 +149,23 @@ async function loadData() {
 
 // ─── STATS ────────────────────────────────────────────────────────────────────
 function renderStats(data) {
-  document.getElementById("statTotal").textContent  = data.length.toLocaleString("ar-DZ");
-  document.getElementById("statYes").textContent    = data.filter(v => v.would_vote === "yes").length.toLocaleString("ar-DZ");
-  document.getElementById("statLikely").textContent = data.filter(v => v.would_vote === "likely").length.toLocaleString("ar-DZ");
+  document.getElementById("statTotal").textContent =
+    data.length.toLocaleString("ar-DZ");
+  document.getElementById("statYes").textContent = data
+    .filter((v) => v.would_vote === "yes")
+    .length.toLocaleString("ar-DZ");
+  document.getElementById("statLikely").textContent = data
+    .filter((v) => v.would_vote === "likely")
+    .length.toLocaleString("ar-DZ");
 
-  const uniqueWilayas = new Set(data.map(v => v.wilaya_code).filter(Boolean));
+  const uniqueWilayas = new Set(data.map((v) => v.wilaya_code).filter(Boolean));
   document.getElementById("statWilayas").textContent = uniqueWilayas.size;
 }
 
 // ─── WILAYA BREAKDOWN ─────────────────────────────────────────────────────────
 function renderWilayaBreakdown(data) {
   const counts = {};
-  data.forEach(v => {
+  data.forEach((v) => {
     if (v.wilaya_code) counts[v.wilaya_code] = (counts[v.wilaya_code] || 0) + 1;
   });
 
@@ -122,24 +173,35 @@ function renderWilayaBreakdown(data) {
   const max = sorted[0]?.[1] || 1;
 
   const container = document.getElementById("wilayaBreakdown");
-  container.innerHTML = sorted.map(([code, count]) => `
+  container.innerHTML = sorted
+    .map(
+      ([code, count]) => `
     <div class="flex items-center gap-2 cursor-pointer hover:opacity-80"
          onclick="filterByWilaya('${code}')">
       <span class="text-gray-600 w-24 truncate text-xs">${WILAYA_NAMES[code] || code}</span>
       <div class="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
-        <div class="bg-green-500 h-2 rounded-full" style="width:${Math.round(count/max*100)}%"></div>
+        <div class="bg-green-500 h-2 rounded-full" style="width:${Math.round((count / max) * 100)}%"></div>
       </div>
       <span class="text-gray-800 font-bold text-xs w-8 text-left">${count}</span>
     </div>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 // ─── POPULATE WILAYA FILTER ───────────────────────────────────────────────────
 function populateWilayaFilter() {
-  const codes = [...new Set(allVoters.map(v => v.wilaya_code).filter(Boolean))].sort();
+  const codes = [
+    ...new Set(allVoters.map((v) => v.wilaya_code).filter(Boolean)),
+  ].sort();
   const sel = document.getElementById("filterWilaya");
-  sel.innerHTML = `<option value="">كل الولايات</option>` +
-    codes.map(c => `<option value="${c}">${WILAYA_NAMES[c] || c} (${c})</option>`).join("");
+  sel.innerHTML =
+    `<option value="">كل الولايات</option>` +
+    codes
+      .map(
+        (c) => `<option value="${c}">${WILAYA_NAMES[c] || c} (${c})</option>`,
+      )
+      .join("");
 }
 
 // ─── FILTER BY WILAYA (click on breakdown) ────────────────────────────────────
@@ -151,20 +213,23 @@ function filterByWilaya(code) {
 
 // ─── APPLY FILTERS ────────────────────────────────────────────────────────────
 function applyFilters() {
-  const search    = document.getElementById("searchInput").value.trim().toLowerCase();
-  const wilaya    = document.getElementById("filterWilaya").value;
-  const vote      = document.getElementById("filterVote").value;
+  const search = document
+    .getElementById("searchInput")
+    .value.trim()
+    .toLowerCase();
+  const wilaya = document.getElementById("filterWilaya").value;
+  const vote = document.getElementById("filterVote").value;
   const volunteer = document.getElementById("filterVolunteer").value;
-  const locale    = document.getElementById("filterLocale").value;
+  const locale = document.getElementById("filterLocale").value;
 
-  filteredVoters = allVoters.filter(v => {
-    if (wilaya    && v.wilaya_code        !== wilaya)    return false;
-    if (vote      && v.would_vote         !== vote)      return false;
+  filteredVoters = allVoters.filter((v) => {
+    if (wilaya && v.wilaya_code !== wilaya) return false;
+    if (vote && v.would_vote !== vote) return false;
     if (volunteer && v.volunteer_interest !== volunteer) return false;
-    if (locale    && v.locale             !== locale)    return false;
+    if (locale && v.locale !== locale) return false;
     if (search) {
       const fullName = `${v.first_name} ${v.last_name}`.toLowerCase();
-      const phone    = (v.phone || "").toLowerCase();
+      const phone = (v.phone || "").toLowerCase();
       if (!fullName.includes(search) && !phone.includes(search)) return false;
     }
     return true;
@@ -175,11 +240,11 @@ function applyFilters() {
 }
 
 function resetFilters() {
-  document.getElementById("searchInput").value   = "";
-  document.getElementById("filterWilaya").value  = "";
-  document.getElementById("filterVote").value    = "";
+  document.getElementById("searchInput").value = "";
+  document.getElementById("filterWilaya").value = "";
+  document.getElementById("filterVote").value = "";
   document.getElementById("filterVolunteer").value = "";
-  document.getElementById("filterLocale").value  = "";
+  document.getElementById("filterLocale").value = "";
   applyFilters();
 }
 
@@ -201,19 +266,28 @@ function renderTable(data) {
 
   empty.classList.add("hidden");
 
-  tbody.innerHTML = data.map((v, i) => {
-    const voteInfo  = VOTE_LABELS[v.would_vote]  || { ar: v.would_vote || "—",  badge: "badge-unsure" };
-    const volLabel  = VOLUNTEER_LABELS[v.volunteer_interest] || (v.volunteer_interest || "—");
-    const localeStr = LOCALE_FLAGS[v.locale] || (v.locale || "—");
-    const wilayaName = WILAYA_NAMES[v.wilaya_code] || v.wilaya_code || "—";
-    const date = v.created_at
-      ? new Date(v.created_at).toLocaleDateString("ar-DZ", { day:"2-digit", month:"2-digit", year:"numeric" })
-      : "—";
-    const message = v.message
-      ? `<span title="${escHtml(v.message)}" class="cursor-help text-blue-500">💬</span>`
-      : "<span class='text-gray-300'>—</span>";
+  tbody.innerHTML = data
+    .map((v, i) => {
+      const voteInfo = VOTE_LABELS[v.would_vote] || {
+        ar: v.would_vote || "—",
+        badge: "badge-unsure",
+      };
+      const volLabel =
+        VOLUNTEER_LABELS[v.volunteer_interest] || v.volunteer_interest || "—";
+      const localeStr = LOCALE_FLAGS[v.locale] || v.locale || "—";
+      const wilayaName = WILAYA_NAMES[v.wilaya_code] || v.wilaya_code || "—";
+      const date = v.created_at
+        ? new Date(v.created_at).toLocaleDateString("ar-DZ", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })
+        : "—";
+      const message = v.message
+        ? `<span title="${escHtml(v.message)}" class="cursor-help text-blue-500">💬</span>`
+        : "<span class='text-gray-300'>—</span>";
 
-    return `
+      return `
       <tr class="border-t border-gray-50">
         <td class="px-4 py-3 text-gray-400 text-xs">${i + 1}</td>
         <td class="px-4 py-3 font-semibold">${escHtml(v.first_name)} ${escHtml(v.last_name)}</td>
@@ -227,41 +301,64 @@ function renderTable(data) {
         <td class="px-4 py-3 text-gray-400 text-xs">${date}</td>
       </tr>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 // ─── EXPORT CSV ───────────────────────────────────────────────────────────────
 function exportCSV() {
-  const headers = ["#","الاسم الأول","الاسم العائلي","الهاتف","الولاية","البلدية","نية التصويت","المساهمة","اللغة","الرسالة","التاريخ"];
+  const headers = [
+    "#",
+    "الاسم الأول",
+    "الاسم العائلي",
+    "الهاتف",
+    "الولاية",
+    "البلدية",
+    "نية التصويت",
+    "المساهمة",
+    "اللغة",
+    "الرسالة",
+    "التاريخ",
+  ];
   const rows = filteredVoters.map((v, i) => [
     i + 1,
     v.first_name || "",
-    v.last_name  || "",
-    v.phone      || "",
+    v.last_name || "",
+    v.phone || "",
     WILAYA_NAMES[v.wilaya_code] || v.wilaya_code || "",
     v.municipality || "",
     VOTE_LABELS[v.would_vote]?.ar || v.would_vote || "",
     VOLUNTEER_LABELS[v.volunteer_interest] || v.volunteer_interest || "",
-    v.locale     || "",
-    (v.message   || "").replace(/,/g, "؛"),
+    v.locale || "",
+    (v.message || "").replace(/,/g, "؛"),
     v.created_at ? new Date(v.created_at).toLocaleDateString("ar-DZ") : "",
   ]);
 
-  const csv = "\uFEFF" + [headers, ...rows].map(r => r.map(c => `"${c}"`).join(",")).join("\n");
+  const csv =
+    "\uFEFF" +
+    [headers, ...rows].map((r) => r.map((c) => `"${c}"`).join(",")).join("\n");
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement("a");
-  a.href     = url;
-  a.download = `داعمو-كحال-امنة-${new Date().toISOString().slice(0,10)}.csv`;
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `داعمو-كحال-امنة-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
-function show(id) { document.getElementById(id)?.classList.remove("hidden"); }
-function hide(id) { document.getElementById(id)?.classList.add("hidden"); }
+function show(id) {
+  document.getElementById(id)?.classList.remove("hidden");
+}
+function hide(id) {
+  document.getElementById(id)?.classList.add("hidden");
+}
 function escHtml(str) {
-  return String(str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────

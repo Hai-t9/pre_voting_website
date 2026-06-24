@@ -31,6 +31,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# dashboard auto-generated config (contains credentials)
+/dashboard/config.js
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

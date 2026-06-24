@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dashboard:config": "node dashboard/generate-config.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2",
