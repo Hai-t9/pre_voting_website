@@ -1,8 +1,8 @@
 // ─── CONFIGURATION ────────────────────────────────────────────────────────────
 // Loaded from config.js (generated from .env.local)
-// If window values aren't set, fallback to empty (will show error)
-const SUPABASE_URL = window.SUPABASE_URL || "";
-const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || "";
+// API_URL points to the Next.js API on Vercel (or localhost for testing)
+const API_URL = window.API_URL || "http://localhost:3000/api/dashboard";
+const API_PASSWORD = "kehal2025";
 // ──────────────────────────────────────────────────────────────────────────────
 
 // ─── WILAYA NAMES (Arabic) ────────────────────────────────────────────────────
@@ -107,23 +107,20 @@ async function loadData() {
   hide("errorState");
 
   try {
-    // Fetch all rows — Supabase default limit is 1000, use range for more
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/votes?select=*&order=created_at.desc&limit=10000`,
-      {
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-        },
+    // Fetch data via secure API (no Supabase creds in browser)
+    const res = await fetch(API_URL, {
+      headers: {
+        Authorization: `Bearer ${API_PASSWORD}`,
       },
-    );
+    });
 
     if (!res.ok) {
       const err = await res.json();
       throw new Error(err.message || `HTTP ${res.status}`);
     }
 
-    allVoters = await res.json();
+    const json = await res.json();
+    allVoters = json.data;
     filteredVoters = [...allVoters];
 
     populateWilayaFilter();

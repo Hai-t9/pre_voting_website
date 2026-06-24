@@ -17,21 +17,17 @@ const env = fs
     return acc;
   }, {});
 
-const url = env["NEXT_PUBLIC_SUPABASE_URL"];
-const key = env["NEXT_PUBLIC_SUPABASE_ANON_KEY"];
-
-if (!url || !key) {
-  console.error("❌ NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY not found in .env.local");
-  process.exit(1);
-}
+// Use SITE_URL from env if available, otherwise default to localhost
+const siteUrl = env["NEXT_PUBLIC_SITE_URL"] || "http://localhost:3000";
 
 const output = `// dashboard/config.js — auto-generated from .env.local
 // Do NOT edit manually. Run: npm run dashboard:config
-// This file is gitignored — never commit real credentials.
 
-window.SUPABASE_URL      = ${JSON.stringify(url)};
-window.SUPABASE_ANON_KEY = ${JSON.stringify(key)};
+window.API_URL = ${JSON.stringify(`${siteUrl}/api/dashboard`)};
 `;
 
 fs.writeFileSync(path.join(__dirname, "config.js"), output);
-console.log("✅ dashboard/config.js generated from .env.local");
+console.log(
+  "✅ dashboard/config.js generated with API_URL =",
+  `${siteUrl}/api/dashboard`,
+);
